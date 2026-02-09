@@ -8,18 +8,87 @@ This guide helps you build Meetily on Linux with **automatic GPU acceleration**.
 
 If you're new to building on Linux, start here. These simple commands work for most users:
 
-### 1. Install Basic Dependencies
+### 1. Install Dependencies
+
+#### Ubuntu/Debian
 
 ```bash
-# Ubuntu/Debian
 sudo apt update
-sudo apt install build-essential cmake git
 
-# Fedora/RHEL
-sudo dnf install gcc-c++ cmake git
+# Build essentials
+sudo apt install -y build-essential cmake git curl
 
-# Arch Linux
-sudo pacman -S base-devel cmake git
+# Rust (if not already installed)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+
+# Node.js and pnpm (if not already installed)
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+npm install -g pnpm
+
+# Tauri build dependencies (required)
+sudo apt install -y \
+    pkg-config \
+    libglib2.0-dev \
+    libgtk-3-dev \
+    libwebkit2gtk-4.1-dev \
+    libappindicator3-dev \
+    librsvg2-dev \
+    libssl-dev \
+    libasound2-dev \
+    clang
+```
+
+#### Fedora/RHEL
+
+```bash
+sudo dnf install -y gcc-c++ cmake git curl
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+
+# Node.js and pnpm
+sudo dnf install -y nodejs
+npm install -g pnpm
+
+# Tauri build dependencies
+sudo dnf install -y \
+    pkgconf-pkg-config \
+    glib2-devel \
+    gtk3-devel \
+    webkit2gtk4.1-devel \
+    libappindicator-gtk3-devel \
+    librsvg2-devel \
+    openssl-devel \
+    alsa-lib-devel \
+    clang
+```
+
+#### Arch Linux
+
+```bash
+sudo pacman -S base-devel cmake git curl
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+
+# Node.js and pnpm
+sudo pacman -S nodejs pnpm
+
+# Tauri build dependencies
+sudo pacman -S \
+    pkgconf \
+    glib2 \
+    gtk3 \
+    webkit2gtk-4.1 \
+    libappindicator-gtk3 \
+    librsvg \
+    openssl \
+    alsa-lib \
+    clang
 ```
 
 ### 2. Build and Run
@@ -129,7 +198,10 @@ Vulkan works on NVIDIA, AMD, and Intel GPUs. Good choice if CUDA/ROCm don't work
 
 ```bash
 # Ubuntu/Debian
-sudo apt install vulkan-sdk libopenblas-dev
+# Prerequisites: Node.js 20+, pnpm, Rust toolchain
+sudo apt install -y pkg-config libglib2.0-dev libgtk-3-dev libwebkit2gtk-4.1-dev \
+    libappindicator3-dev librsvg2-dev libssl-dev libasound2-dev clang \
+    libvulkan-dev glslang-tools libshaderc-dev glslc
 
 # Fedora
 sudo dnf install vulkan-devel openblas-devel
