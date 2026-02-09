@@ -10,24 +10,24 @@ If you're new to building on Linux, start here. These simple commands work for m
 
 ### 1. Install Dependencies
 
-#### Ubuntu/Debian
 
 ```bash
+# Ubuntu/Debian
 sudo apt update
 
-# Build essentials
+## Build essentials
 sudo apt install -y build-essential cmake git curl
 
-# Rust (if not already installed)
+## Rust (if not already installed)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.cargo/env
 
-# Node.js and pnpm (if not already installed)
+## Node.js and pnpm (if not already installed)
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 npm install -g pnpm
 
-# Tauri build dependencies (required)
+## Tauri build dependencies (required)
 sudo apt install -y \
     pkg-config \
     libglib2.0-dev \
@@ -37,58 +37,13 @@ sudo apt install -y \
     librsvg2-dev \
     libssl-dev \
     libasound2-dev \
-    clang
-```
 
-#### Fedora/RHEL
 
-```bash
-sudo dnf install -y gcc-c++ cmake git curl
+# Fedora/RHEL
+sudo dnf install gcc-c++ cmake git
 
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source ~/.cargo/env
-
-# Node.js and pnpm
-sudo dnf install -y nodejs
-npm install -g pnpm
-
-# Tauri build dependencies
-sudo dnf install -y \
-    pkgconf-pkg-config \
-    glib2-devel \
-    gtk3-devel \
-    webkit2gtk4.1-devel \
-    libappindicator-gtk3-devel \
-    librsvg2-devel \
-    openssl-devel \
-    alsa-lib-devel \
-    clang
-```
-
-#### Arch Linux
-
-```bash
-sudo pacman -S base-devel cmake git curl
-
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source ~/.cargo/env
-
-# Node.js and pnpm
-sudo pacman -S nodejs pnpm
-
-# Tauri build dependencies
-sudo pacman -S \
-    pkgconf \
-    glib2 \
-    gtk3 \
-    webkit2gtk-4.1 \
-    libappindicator-gtk3 \
-    librsvg \
-    openssl \
-    alsa-lib \
-    clang
+# Arch Linux
+sudo pacman -S base-devel cmake git
 ```
 
 ### 2. Build and Run
